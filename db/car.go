@@ -60,10 +60,10 @@ func (db *Database) GetCarById(id string) (*Car, error) {
 	return &car, err
 }
 
-func (db *Database) GetCars() ([]Car, error) {
+func (db *Database) GetCars(limit int, offset int) ([]Car, error) {
 	var cars []Car
 
-	err := db.Gorm.Model(&Car{}).Find(&cars).Error
+	err := db.Gorm.Model(&Car{}).Limit(limit).Offset(offset).Find(&cars).Error
 
 	return cars, err
 }
